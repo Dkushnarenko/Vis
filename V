@@ -1,0 +1,46 @@
+import java.util.Scanner;
+
+public class LeapYearCalculator {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        // Запрос ввода года от пользователя
+        System.out.println("Введите год:");
+        int year = 0;
+        try {
+            year = scanner.nextInt();
+        } catch (Exception e) {
+            System.out.println("Некорректный ввод. Пожалуйста, введите целое число.");
+            scanner.nextLine(); // Считываем оставшуюся часть строки
+            return;
+        }
+        
+        // Проверка, является ли год високосным
+        boolean isLeapYear = isLeapYear(year);
+        if (isLeapYear) {
+            System.out.println(year + " является високосным годом.");
+        } else {
+            System.out.println(year + " не является високосным годом.");
+        }
+    }
+
+    // Метод для проверки, является ли год високосным
+    private static boolean isLeapYear(int year) {
+        // Проверка, делится ли год на 4 без остатка
+        if (year % 4 == 0) {
+            // Проверка, делится ли год на 100 без остатка (исключение для столетних годов)
+            if (year % 100 == 0) {
+                // Проверка, делится ли год на 400 без остатка (правило для столетних годов)
+                if (year % 400 == 0) {
+                    return true;
+                } else {
+                    return false;
+                }
+            } else {
+                return true;
+            }
+        } else {
+            return false;
+        }
+    }
+}
